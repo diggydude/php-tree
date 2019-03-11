@@ -5,7 +5,7 @@ This is not a BTree or B+ Tree or any other kind of high-performance n-ary tree.
 
 There are no iterators. Instead, the Tree and Node classes have methods useful for graphing search results and various types of subtrees.
 
-See the comments at the following class methods for more details:
+See examples.php and the comments at the following class methods for more details:
 
 Tree::__construct()
 
@@ -22,5 +22,3 @@ Node::getBranch()
 Node::getLimb()
 
 Node::getStem()
-
-User code examples will be posted soon. Enjoy!
