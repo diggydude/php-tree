@@ -150,10 +150,10 @@
     <p>Get the branch of the Tree containing Node with nodeId of 15:</p>
     <?php echo $view2; ?>
     <h2>Example 4: Limb</h2>
-    <p>Get the limb of the Tree containing Node with nodeId of 10</p>
+    <p>Get the limb of the Tree containing Node with nodeId of 10:</p>
     <?php echo $view3; ?>
     <h2>Example 5: Stem</h2>
-    <p>Get the stem based on Node with nodeId of 13</p>
+    <p>Get the stem based on Node with nodeId of 13:</p>
     <?php echo $view4; ?>
   </body>
 </html>
