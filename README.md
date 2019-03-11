@@ -8,12 +8,19 @@ There are no iterators. Instead, the Tree and Node classes have methods useful f
 See the comments at the following class methods for more details:
 
 Tree::__construct()
+
 Tree::search()
+
 Tree::find()
+
 Tree::graph()
+
 Node::__construct()
+
 Node::getBranch()
+
 Node::getLimb()
+
 Node::getStem()
 
 User code examples will be posted soon. Enjoy!
