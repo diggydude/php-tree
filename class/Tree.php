@@ -335,7 +335,7 @@
         if ($node->nodeId === 0) {
           continue;
         }
-        $values[] = $node->value;
+        $values[] = get_object_vars($node->value);
       }
       return serialize($values);
     } // __toString
