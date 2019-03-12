@@ -328,7 +328,7 @@
       return $html;
     } // _renderHtml
 
-    public function __toString()
+    public function toArray()
     {
       $values = array();
       foreach ($this->nodes as $node) {
@@ -337,6 +337,12 @@
         }
         $values[] = get_object_vars($node->value);
       }
+      return $values;
+    } // toArray
+
+    public function __toString()
+    {
+      $values = $this->toArray();
       return serialize($values);
     } // __toString
 
@@ -344,8 +350,9 @@
     {
       switch ($prop) {
         case "tree":
-        case "value":
           return $this;
+        case "value":
+          return $this->toArray();
         case "nodeId":
         case "parentId":
         case "childNodes":
