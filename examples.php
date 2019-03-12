@@ -155,5 +155,25 @@
     <h2>Example 5: Stem</h2>
     <p>Get the stem based on Node with nodeId of 13:</p>
     <?php echo $view4; ?>
+    <h2>Example 6: Modify the Tree</h2>
+    <p>Add a top-level Node and re-parent the existing top-level Nodes:</p>
+    <?php
+
+      $top = $tree->createNode(
+               (object) array(
+                 'id'       => 17,
+                 'parentId' => 0,
+                 'uri'      => '#',
+                 'text'     => 'Tutorials'
+               )
+             );
+      $tree->appendChild($top);
+      while (count($tree->root->childNodes) > 1) {
+        $child = $tree->removeChild(0);
+        $top->appendChild($child);
+      }
+      echo $tree->graph($template);
+
+    ?>
   </body>
 </html>
