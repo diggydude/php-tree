@@ -168,7 +168,7 @@
                )
              );
       $tree->appendChild($top);
-      while (count($tree->root->childNodes) > 1) {
+      while (count($tree->childNodes) > 1) {
         $child = $tree->removeChild(0);
         $top->appendChild($child);
       }
