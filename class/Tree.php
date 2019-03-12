@@ -342,7 +342,17 @@
 
     public function __get($prop)
     {
-      return (property_exists($this, $prop)) ? $this->$prop : null;
+      switch ($prop) {
+        case "tree":
+        case "value":
+          return $this;
+        case "nodeId":
+        case "parentId":
+        case "childNodes":
+          return $this->root->$prop;
+        default:
+          return (property_exists($this, $prop)) ? $this->$prop : null;
+      }
     } // __get
 
   } // Tree
