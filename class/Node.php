@@ -69,6 +69,7 @@
       $node = $this->getChild($index);
       if ($node !== null) {
         unset($this->childNodes[$index]);
+		$this->childNodes = array_values($this->childNodes);
       }
       return $node;
     } // removeChild
