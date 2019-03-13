@@ -137,6 +137,7 @@
     <style type="text/css">
       body {font-family: sans-serif;}
     </style>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/treeflex@2.0.1/dist/css/treeflex.css" />
   </head>
   <body>
     <h1>PHP-Tree Examples</h1>
@@ -175,5 +176,20 @@
       echo $tree->graph($template);
 
     ?>
+    <h2>Example 7: Fun with Templates!</h2>
+    <p>You can use CSS to style the HTML output so it'll work with some client-side "TreeView" scripts. Here, we use
+       <a href="https://www.cssscript.com/semantic-hierarchy-tree-treeflex/" target="_blank">Treeflex</a>
+       to turn Example 6 into an organizational chart. (This also works with the JavaScript version
+       of this script.)
+    </p>
+    <div class="tf-tree">
+    <?php
+
+      $template = "<span class=\"tf-nc\"><a href=\"<%uri%>\" target=\"_blank\"><%text%></a></span>";
+      echo $tree->graph($template);
+
+    ?>
+    </div>
+    </script>
   </body>
 </html>
