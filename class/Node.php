@@ -111,6 +111,7 @@
     public function getBranch()
     {
       $nodes = $this->getAncestors();
+      $nodes = array($nodes[count($nodes) - 1]);
       $nodes = array_merge($nodes, $nodes[count($nodes) - 1]->getDescendants());
       $store = array();
       foreach ($nodes as $node) {
