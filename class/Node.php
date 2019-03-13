@@ -77,11 +77,12 @@
     public function getAncestors()
     {
       $results = array();
-      if ($this->nodeId === 0) {
+      if ($this->parentId === 0) {
         return $results;
       }
-      $results[] = $this;
-      $results = array_merge($results, $this->getParent()->getAncestors());
+      $parentNode = $this->getParent();
+      $results[] = $parentNode;
+      $results = array_merge($results, $parentNode->getAncestors());
       return $results;
     } // getAncestors
 
@@ -94,7 +95,7 @@
       $children = $this->childNodes;
       $results  = $children;
       foreach ($children as $child) {
-        $results = array_merge($results, $child->childNodes);
+        $results = array_merge($results, $child->getDescendants());
       }
       return $results;
     } // getDescendants
@@ -110,10 +111,7 @@
     public function getBranch()
     {
       $nodes = $this->getAncestors();
-      $nodes = $nodes[count($nodes) - 1]->getDescendants();
-      if ($nodes[0]->parentId !== 0) {
-        array_unshift($nodes, $nodes[0]->getParent());
-      }
+      $nodes = array_merge($nodes, $nodes[count($nodes) - 1]->getDescendants());
       $store = array();
       foreach ($nodes as $node) {
         $store[] = get_object_vars($node->value);
@@ -137,6 +135,7 @@
       foreach ($nodes as $node) {
         $store[] = get_object_vars($node->value);
       }
+      $store[] = get_object_vars($this->value);
       return new Tree($store);
     } // getLimb
 

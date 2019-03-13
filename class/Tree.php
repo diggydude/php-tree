@@ -130,10 +130,11 @@
       $results = $this->find($field, $operator, $value);
       $store   = array();
       foreach ($results as $node) {
+        $store[$node->nodeId] = get_object_vars($node->value);
         $ancestors = $node->getAncestors();
-        foreach ($ancestors as $node) {
-          if (!array_key_exists($node->nodeId, $store)) {
-            $store[$node->nodeId] = get_object_vars($node->value);
+        foreach ($ancestors as $ancestor) {
+          if (!array_key_exists($ancestor->nodeId, $store)) {
+            $store[$ancestor->nodeId] = get_object_vars($ancestor->value);
           }
         }
       }
