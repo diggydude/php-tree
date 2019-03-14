@@ -39,15 +39,7 @@
 
     public function __construct($store = array())
     {
-      $this->nodes    = array();
-      $this->root     = $this->createNode(
-                          (object) array(
-                            'value'    => null,
-                            'id'       => 0,
-                            'parentId' => null
-                          )
-                        );
-      $this->nodes[0] = $this->root;
+      $this->clear();
       if (is_string($store)) {
         $store = unserialize($store);
       }
@@ -87,6 +79,11 @@
       "id" and "parentId" fields. The specified fields are used
       instead of "id" and "parentId".
 
+      You can combine multiple stores into one Tree by repeatedly
+      calling importStore() with different store arguments. To empty
+      the Tree for reuse, call clear() between imports or other
+      modifications.
+
     */
 
     public function importStore($idField, $parentIdField, $store)
@@ -111,6 +108,19 @@
         }
       }
     } // importStore
+
+    public function clear()
+    {
+      $this->nodes    = array();
+      $this->root     = $this->createNode(
+                          (object) array(
+                            'value'    => null,
+                            'id'       => 0,
+                            'parentId' => null
+                          )
+                        );
+      $this->nodes[0] = $this->root;
+    } // clear
 
     public function createNode($value)
     {
