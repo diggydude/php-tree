@@ -32,6 +32,9 @@
       be a database query resultset having key column names
       aliased to "id" and "parentId".
 
+      Alternately, you can call the import() method to populate
+      the Tree using stand-in fields for "id" and "parentId".
+
     */
 
     public function __construct($store = array())
@@ -42,15 +45,11 @@
                             'value'    => null,
                             'id'       => 0,
                             'parentId' => null
-                          ),
-                          $this
+                          )
                         );
       $this->nodes[0] = $this->root;
       if (is_string($store)) {
         $store = unserialize($store);
-      }
-      if (is_object($store)) {
-        $store = get_object_vars($store);
       }
       if (!is_array($store)) {
         $store = array();
@@ -81,6 +80,37 @@
     {
       file_put_contents($filename, (string) $this);
     } // saveAs
+
+    /*
+
+      import() populates a Tree from a store that doesn't have
+      "id" and "parentId" fields. The specified fields are used
+      instead of "id" and "parentId".
+
+    */
+
+    public function import($idField, $parentIdField, $store)
+    {
+      foreach ($store as &$value) {
+        if (is_object($value)) {
+          $value = get_object_vars($value);
+        }
+        if ($idField != "id") {
+          $value['id'] = $value[$idField];
+        }
+        if ($parentIdField != "parentId") {
+          $value['parentId'] = $value[$parentIdField];
+        }
+      }
+      usort($store, function($a, $b) {return ($a['id'] == $b['id']) ? 0 : (($a['id'] < $b['id']) ? -1 : 1);});
+      foreach ($store as $value) {
+        if (!array_key_exists($value['id'], $this->nodes)) {
+          $node = $this->createNode($value);
+          $this->nodes[$node->nodeId] = $node;
+          $this->nodes[$node->parentId]->appendChild($node);
+        }
+      }
+    } // import
 
     public function createNode($value)
     {
