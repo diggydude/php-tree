@@ -32,7 +32,7 @@
       be a database query resultset having key column names
       aliased to "id" and "parentId".
 
-      Alternately, you can call the import() method to populate
+      Alternately, you can call the importStore() method to populate
       the Tree using stand-in fields for "id" and "parentId".
 
     */
@@ -83,13 +83,13 @@
 
     /*
 
-      import() populates a Tree from a store that doesn't have
+      importStore() populates a Tree from a store that doesn't have
       "id" and "parentId" fields. The specified fields are used
       instead of "id" and "parentId".
 
     */
 
-    public function import($idField, $parentIdField, $store)
+    public function importStore($idField, $parentIdField, $store)
     {
       foreach ($store as &$value) {
         if (is_object($value)) {
@@ -110,7 +110,7 @@
           $this->nodes[$node->parentId]->appendChild($node);
         }
       }
-    } // import
+    } // importStore
 
     public function createNode($value)
     {
