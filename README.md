@@ -9,6 +9,8 @@ See examples.php and the comments at the following class methods for more detail
 
 Tree::__construct()
 
+Tree::importStore()
+
 Tree::search()
 
 Tree::find()
