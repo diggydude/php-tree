@@ -111,7 +111,7 @@
 
   // Create a new Tree from the saved file
   unset($tree);
-  $tree = Tree::fromFile('./links.dat');
+  $tree = Tree::load('./links.dat');
   $template = "<a href=\"<%uri%>\" target=\"_blank\"><%text%></a>";
   $view1 = $tree->graph($template);
 
