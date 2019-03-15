@@ -62,11 +62,11 @@
       return new Tree($store);
     } // fromString
 
-    public static function fromFile($filename)
+    public static function load($filename)
     {
       $data = file_get_contents($filename);
       return self::fromString($data);
-    } // fromFile
+    } // load
 
     public function saveAs($filename)
     {
